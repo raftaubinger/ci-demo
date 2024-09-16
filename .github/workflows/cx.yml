@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  schedule:
+    - cron: '0 1 * * *'    
+  workflow_dispatch:
+  pull_request:
+  push:
+    paths-ignore:
+      - 'README.md'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [cxarm, bxrl78fs]
+    container:
+      image: ghcr.io/fae-emea/${{ matrix.arch }}
+    steps:      
+      - name: Checkout project
+        uses: actions/checkout@v4
+      - name: Invoke the Arm compiler
+        if: matrix.arch == 'cxarm'
+        run: iccarm --version
+      - name: Invoke the RL78 compiler
+        if: matrix.arch == 'bxrl78fs'
+        run: iccrl78 --version
+      - name: CMake - Configure
+        run: cmake -S. -Bbuild -GNinja -DBUILD_TYPE=${{ matrix.arch }}
+      - name: CMake - Build
+        run: cmake --build build -j `nproc` --verbose
+
+  analyze:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+      packages: read
+    strategy:
+      matrix:
+        arch: [cxarm]
+    container:
+      image: ghcr.io/fae-emea/${{ matrix.arch }}
+    needs: build
+    steps:      
+      - name: Checkout project
+        uses: actions/checkout@v4
+      - name: Invoke the compiler
+        run: iccarm --version   
+      - name: C-STAT Analysis
+        run: |
+             ichecks --all --output checks.manifest
+             icstat --checks checks.manifest --db cstat.db analyze --sarif_dir cstat -- iccarm library/BalancedCrc16.c
+             icstat --checks checks.manifest --db cstat.db analyze --sarif_dir cstat -- iccarm library/BalancedCrc32.c
+             icstat --checks checks.manifest --db cstat.db analyze --sarif_dir cstat -- iccarm library/FastCrc16.c
+             icstat --checks checks.manifest --db cstat.db analyze --sarif_dir cstat -- iccarm library/FastCrc32.c
+             icstat --checks checks.manifest --db cstat.db analyze --sarif_dir cstat -- iccarm library/MirrorBalanced.c
+             icstat --checks checks.manifest --db cstat.db analyze --sarif_dir cstat -- iccarm library/MirrorFast.c
+             icstat --checks checks.manifest --db cstat.db analyze --sarif_dir cstat -- iccarm library/MirrorSmall.c
+             icstat --checks checks.manifest --db cstat.db analyze --sarif_dir cstat -- iccarm library/slow_crc16.c
+             icstat --checks checks.manifest --db cstat.db analyze --sarif_dir cstat -- iccarm library/SmallCrc16.c
+             icstat --checks checks.manifest --db cstat.db analyze --sarif_dir cstat -- iccarm library/SmallCrc32.c
+             icstat --checks checks.manifest --db cstat.db analyze --sarif_dir cstat -- iccarm arm/main.c -Ilibrary/
+      - name: Store SARIF files
+        uses: actions/upload-artifact@v4
+        with:
+          name: sarif-${{ matrix.arch }}
+          path: cstat
+      - name: Fetch and Merge SARIF files
+        uses: actions/download-artifact@v4
+        with:
+          path: ../results
+          pattern: sarif-${{ matrix.arch }}
+          merge-multiple: true
+      - name: Upload results
+        uses: github/codeql-action/upload-sarif@v3
+
