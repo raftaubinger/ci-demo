@@ -8,9 +8,9 @@ project(ci-demo LANGUAGES C)
 
 add_subdirectory(library)
 
-if(BUILD_TYPE STREQUAL cxarm)
+#if(BUILD_TYPE STREQUAL cxarm)
   add_subdirectory(arm)
-else()
-  add_subdirectory(rl78)
-endif()
+#else()
+#  add_subdirectory(rl78)
+#endif()
 
