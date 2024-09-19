@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        arch: [bxarm, cxarm]
+        arch: ['bxarm:9.60.2', 'cxarm:9.60.3.6333']
         wakeup: [wake, nowake]
     container:
       image: ghcr.io/fae-emea/${{ matrix.arch }}
@@ -22,6 +22,6 @@ jobs:
         name: Invoke the Arm compiler
         run: iccarm --version
       - name: CMake - Configure
-        run: cmake -S. -Bbuild -GNinja -DBUILD_TYPE=${{ matrix.arch }}
+        run: cmake -S. -Bbuild -GNinja
       - name: CMake - Build
         run: cmake --build build -j `nproc` --verbose
