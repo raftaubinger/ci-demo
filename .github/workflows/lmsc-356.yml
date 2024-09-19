@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        arch: ['bxarm:9.60.2', 'cxarm:9.60.3.6333']
+        arch: ['bxarm:9.60.2', 'cxarm:9.60.3.6333-cap-max']
         wakeup: [wake, nowake]
     container:
       image: ghcr.io/fae-emea/${{ matrix.arch }}
