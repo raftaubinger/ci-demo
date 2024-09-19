@@ -1,0 +1,25 @@
+name: LMSC-356
+
+on:
+  workflow_dispatch:
+#  push:
+#    paths-ignore:
+#      - 'README.md'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [bxarm, cxarm]
+    container:
+      image: ghcr.io/fae-emea/${{ matrix.arch }}
+    steps:      
+      - name: Checkout project
+        uses: actions/checkout@v4
+      - name: Invoke the Arm compiler
+        run: iccarm --version
+      - name: CMake - Configure
+        run: cmake -S. -Bbuild -GNinja -DBUILD_TYPE=${{ matrix.arch }}
+      - name: CMake - Build
+        run: cmake --build build -j `nproc` --verbose
