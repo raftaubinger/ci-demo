@@ -7,6 +7,26 @@
         {
             "type": "cspy",
             "request": "launch",
+            "name": "Debug with C-SPY",
+            "target": "arm",
+            "program": "${workspaceFolder}/Debug/Exe/ewproj.out",
+            "stopOnSymbol": "main",
+            "workbenchPath": "workbenchPath",
+            "driver": "Simulator",
+            "driverOptions": [
+                "--endian=little",
+                "--cpu=Cortex-M4",
+                "--fpu=None",
+                "--semihosting"
+            ],
+            "download": {
+                "flashLoader": "",
+                "deviceMacros": []
+            }
+        },
+        {
+            "type": "cspy",
+            "request": "launch",
             "name": "IAR C-SPY Simulator",
             "target": "arm",
             "program": "${command:cmake.launchTargetPath}",

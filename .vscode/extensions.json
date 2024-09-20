@@ -1,0 +1,13 @@
+{
+    // List of extensions used in this workspace
+    "recommendations": [
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode-remote.vscode-remote-extensionpack",
+        "ms-vscode.vscode-serial-monitor",
+        "iarsystems.iar-debug"
+    ],
+    // List of extensions recommended by VSCode that shod not be recommended
+    "unwantedRecommendations": [
+
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    // These settings will ensure that the CMake Tools extension
+    // will launch the IAR C-SPY Debugger instead of trying to launch
+    // the executable on the host
+    "cmake.options.statusBarVisibility": "visible",
+    "cmake.buildBeforeRun": true,
+    "cmake.configureOnOpen": false,
+    "cmake.useCMakePresets": "always",
+    "cmake.options.advanced": {
+        "folder": {
+            "projectStatusVisibility": "visible"
+        },
+        "configure": {
+            "projectStatusVisibility": "visible",
+            "statusBarVisibility": "visible",
+        },
+        "build": {
+            "projectStatusVisibility": "visible",
+            "statusBarVisibility": "visible",
+        },
+        "buildTarget": {
+            "statusBarVisibility": "visible"
+        },
+        "ctest": {
+            "projectStatusVisibility": "visible",
+            "statusBarVisibility": "visible",
+        },
+        "debug": {
+            "projectStatusVisibility": "hidden",
+            "statusBarVisibility": "hidden"
+        },
+        "launch": {
+            "projectStatusVisibility": "hidden",
+            "statusBarVisibility": "hidden",
+        },
+        "cpack": {
+            "projectStatusVisibility": "hidden",
+            "statusBarVisibility": "hidden",
+        },
+        "workflow": {
+            "projectStatusVisibility": "hidden",
+            "statusBarVisibility": "hidden"
+        },
+        "launchTarget": {
+            "statusBarVisibility": "hidden"
+        },
+        "packagePreset": {
+            "statusBarVisibility": "hidden"
+        },
+        "workflowPreset": {
+            "statusBarVisibility": "hidden"
+        }        
+    },
+    // Intellisense settings
+    "C_Cpp.default.compilerPath": "/opt/iarsystems/bxarm/arm/bin/iccarm",
+    "C_Cpp.default.cStandard": "c17",
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.intelliSenseMode": "clang-arm",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "C_Cpp.default.mergeConfigurations": true,
+    "C_Cpp.default.includePath": [
+        "/opt/iarsystems/bxarm/arm/inc/c",
+        "/opt/iarsystems/bxarm/arm/inc/c/aarch32",
+        "/opt/iarsystems/bxarm/arm/inc/libcpp",
+        "/opt/iarsystems/bxarm/arm/inc/cpp",
+        "/opt/iarsystems/bxarm/arm/inc/cpp/aarch32",
+    ],
+    "C_Cpp.default.forcedInclude": [
+        "${workspaceFolder}/.vscode/iccarm_predef.h",
+        "${workspaceFolder}/.vscode/iccarm_keywords.h",  
+    ],
+    // CMake settings
+    "cmake.enabledOutputParsers": [
+        "cmake",
+        "iar"
+    ],
+    "files.associations": {
+        "string": "cpp"
+    }
+}
