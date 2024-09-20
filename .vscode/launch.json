@@ -11,7 +11,7 @@
             "target": "arm",
             "program": "${command:cmake.launchTargetPath}",
             "stopOnSymbol": "main",
-            "workbenchPath": "/opt/iarsystems/cxarm",
+            "workbenchPath": "/opt/iar/cxarm",
             "projectPath": "${workspaceRoot}",
             "driver": "Simulator",
             "driverOptions": [
@@ -19,7 +19,7 @@
                 "--cpu=cortex-m4",
                 "--fpu=vfpv4_sp",
                 "-p",
-                "/opt/iarsystems/cxarm/arm/config/debugger/ST/STM32F407VG.ddf",
+                "/opt/iar/cxarm/arm/config/debugger/ST/STM32F407VG.ddf",
                 "--device=STM32F407VG",
                 "--semihosting",
             ]
