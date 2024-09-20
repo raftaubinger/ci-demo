@@ -1,6 +1,6 @@
 {
-    "name": "BXARM",
-    "image": "ghcr.io/fae-emea/bxarm",
+    "name": "CXARM",
+    "image": "ghcr.io/fae-emea/cxarm",
     "runArgs": ["--privileged"],
     "customizations": {
       "vscode": {
