@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: fae-emea-lnx-toy
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         arch: [cxarm, bxrl78fs]
@@ -32,7 +32,7 @@ jobs:
         run: cmake --build build -j `nproc` --verbose
 
   analyze:
-    runs-on: fae-emea-lnx-toy
+    runs-on: ubuntu-latest
     permissions:
       security-events: write
       actions: read
