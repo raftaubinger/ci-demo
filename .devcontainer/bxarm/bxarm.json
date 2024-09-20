@@ -1,0 +1,17 @@
+{
+    "name": "BXARM",
+    "image": "ghcr.io/fae-emea/bxarm",
+    "workspaceFolder": "arm",
+    "runArgs": ["--privileged"],
+    "customizations": {
+      "vscode": {
+        "extensions": [
+            "ms-vscode.cpptools-extension-pack",
+            "ms-vscode-remote.vscode-remote-extensionpack",
+            "ms-vscode.vscode-serial-monitor",
+            "github.vscode-github-actions",
+            "iarsystems.iar-debug"
+        ]
+      }
+    }
+}
