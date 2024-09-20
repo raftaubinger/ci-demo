@@ -18,7 +18,5 @@
       "type=bind,src=${localEnv:HOME}/.gnupg,dst=/build/.gnupg",
       "type=bind,src=/usr/local/etc/IARSystems,dst=/usr/local/etc/IARSystems",
       "type=bind,src=/dev/bus/usb,dst=/dev/bus/usb"
-    ],
-    // Regenerate macros for Intellisense
-    "postAttachCommand": "iccarm . --c++ --predef_macros=n .vscode/iccarm_predef.h"
-  }
+    ]
+}
