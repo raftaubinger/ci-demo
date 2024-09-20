@@ -1,7 +1,6 @@
 {
     "name": "BXARM",
     "image": "ghcr.io/fae-emea/bxarm",
-    "workspaceFolder": "arm",
     "runArgs": ["--privileged"],
     "customizations": {
       "vscode": {
