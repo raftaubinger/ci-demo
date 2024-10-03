@@ -14,14 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        arch: [cxarm, bxrl78fs]
+        arch: [bxarm, bxrl78fs]
     container:
       image: ghcr.io/fae-emea/${{ matrix.arch }}
     steps:      
       - name: Checkout project
         uses: actions/checkout@v4
       - name: Invoke the Arm compiler
-        if: matrix.arch == 'cxarm'
+        if: matrix.arch == 'bxarm'
         run: iccarm --version
       - name: Invoke the RL78 compiler
         if: matrix.arch == 'bxrl78fs'
@@ -40,7 +40,7 @@ jobs:
       packages: read
     strategy:
       matrix:
-        arch: [cxarm]
+        arch: [bxarm]
     container:
       image: ghcr.io/fae-emea/${{ matrix.arch }}
     needs: build
